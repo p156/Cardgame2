@@ -7,182 +7,57 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public bool talkendflag;       //‰ï˜bI—¹ƒtƒ‰ƒO
-    private bool turnflag;    //ƒ^[ƒ“ŠJnƒtƒ‰ƒO
+    public bool talkendflag;       //ä¼šè©±çµ‚äº†ãƒ•ãƒ©ã‚°
     [SerializeField] Intermediate Status;
     [SerializeField] private state Now;
+    [SerializeField] private PLstatus.level Level_veiw;
 
-    [Header("ƒXƒe[ƒWÚ×")]
+
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¸è©³ç´°")]
     [Space(10)]
 
-    [Header("ƒfƒbƒL")]
-    [SerializeField] private List<int> Dack_veiw;
-    [SerializeField] private List<int> Trash_veiw;
-
-    [Header("ƒLƒƒƒ‰ƒXƒe[ƒ^ƒX")]
+    [Header("ã‚­ãƒ£ãƒ©ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹")]
     [SerializeField] public Image PLimage;
-    [SerializeField] private int HP_view;
-    [SerializeField] private PLstatus.level Level_veiw;
-    [SerializeField] public GameObject PL_HP;
-    [SerializeField] private GameObject PL_hand;
-    [SerializeField] private int PLHandNumber;
-
-
-    [Header("ƒGƒlƒ~[&ƒoƒgƒ‹ƒXƒe[ƒ^ƒX")]
     [SerializeField] public Image Enemyimage;
-    [SerializeField] private GameObject enemy_HP;
-    [SerializeField] private GameObject TurnEnd;
-    [SerializeField] private GameObject ManaCostPanel;
 
-    [Header("ƒƒCƒ“ƒQ[ƒ€‚ÌƒJ[ƒhŒn")]
-    [SerializeField] CardController cardPrefab;
-    [SerializeField] Transform playerHand;
-
-    [Header("ƒXƒg[ƒŠ[‚ÌUI")]
+    [Header("ã‚¹ãƒˆãƒ¼ãƒªãƒ¼ã®UI")]
     [SerializeField] private GameObject talk;
 
     void Start()
     {
-        //”ñ•\¦ & ‰Šú‰»
-        HP_view = Status .HP_Intermediate;
-        Level_veiw = Status.Level_Intermediate;
-        Dack_veiw = Status.Dack_Intermediate;
-
-        talkendflag = false;
-        Now = state.starttalk;
-        Shuffle();
-
-        PL_HP.SetActive(false);
-        PL_hand.SetActive(false);
-        enemy_HP.SetActive(false);
-        TurnEnd.SetActive(false);
-        ManaCostPanel.SetActive(false);
-        talk.SetActive(false);
+        //éè¡¨ç¤º & åˆæœŸåŒ–
     }
 
     private void Update()
     {
 
-        if (Now == state.starttalk)//Å‰‚Ìƒg[ƒN
+        if (Now == state.starttalk)//æœ€åˆã®ãƒˆãƒ¼ã‚¯
         {
-            talk.GetComponent<TalkDisplay>().texts = Status.First_Intermediate;
-            PLimage.sprite = Status.First_Intermediate.My;
-            Enemyimage.sprite = Status.First_Intermediate.Enemy;
-            talk.SetActive(true);
-            if (talkendflag == true)
-            {
-                talkendflag = false;
-                talk.SetActive(false);
-                Now = state.battle;
-            }
+           
         }
-        if (Now == state.battle)//ƒoƒgƒ‹
+        if (Now == state.battle)//ãƒãƒˆãƒ«
         {
-            if (turnflag == false)
-            {
-                battleMordchange();
-                StartGame();
-            }
-            if (int.Parse(enemy_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0)
-            {
-                TalkMordchange();
-                Now = state.endtalk;
-                //ƒQ[ƒ€I—¹ˆ—
-            }
-            if (int.Parse(PL_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0) 
-            {
-                //ƒQ[ƒ€ƒI[ƒo[
-            }
+            
         }
-        if (Now == state.endtalk)//ÅŒã‚Ìƒg[ƒN
-        {
-            talk.GetComponent<TalkDisplay>().texts = Status.End_Intermediate;
-            talk.SetActive(true);
-            if (talkendflag == true)
-            {
-                //ƒV[ƒ“ˆÚ“®
-            }
-        }
+ 
     }
-
-    void battleMordchange()
-    {
-        PL_HP.SetActive(true);
-        PL_hand.SetActive(true);
-        enemy_HP.SetActive(true);
-        TurnEnd.SetActive(true);
-        ManaCostPanel.SetActive(true);
-    }
-
+    //ãƒˆãƒ¼ã‚¯å‰ã«UIã‚’æ¶ˆã™ã‚‚ã®
     void TalkMordchange()
     {
-        PL_HP.SetActive(false);
-        PL_hand.SetActive(false);
-        enemy_HP.SetActive(false);
-        TurnEnd.SetActive(false);
-        ManaCostPanel.SetActive(false);
+
     }
 
-    void StartGame()@//ƒ^[ƒ“ŠJn
+    //ãƒãƒˆãƒ«å‰ã«UIã‚’æ¶ˆã™ã‚‚ã®
+    void battleMordchange()
     {
-        int i = 0;
-        while (i < PLHandNumber)
-        {
-            CreateCard(Dack_veiw[0], playerHand);
-            Dack_veiw.RemoveAt(0);
-            i++;
-        }
-
-        turnflag = true;
+        
     }
 
-    public void EndGame()//ƒ^[ƒ“ƒGƒ“ƒhˆ—
-    {
-        int i = 0;
-        while (i < PLHandNumber)
-        {
-            GameObject card = playerHand.GetChild(i).gameObject;
-            Trash_veiw.Add(card.GetComponent<CardView>().ID);
-            Destroy(card);
-            i++;
-        }
 
-        EnemyAtack(); //“G‚ÌUŒ‚
-        StartGame();//ƒhƒ[
-    }
 
-    public void EnemyAtack()
-    {
 
-    }
 
-    void CreateCard(int cardID, Transform place)@//ƒJ[ƒh¶¬
-    {
-        CardController card = Instantiate(cardPrefab, place);
-        card.Init(cardID);
-    }
-
-    void Shuffle() // ƒfƒbƒL‚ğƒVƒƒƒbƒtƒ‹‚·‚é
-    {
-        // ®” n ‚Ì‰Šú’l‚ÍƒfƒbƒL‚Ì–‡”
-        int n = Dack_veiw.Count;
-
-        // n‚ª1‚æ‚è¬‚³‚­‚È‚é‚Ü‚ÅŒJ‚è•Ô‚·
-        while (n > 1)
-        {
-            n--;
-
-            // k‚Í 0 ` n+1 ‚ÌŠÔ‚Ìƒ‰ƒ“ƒ_ƒ€‚È’l
-            int k = UnityEngine.Random.Range(0, n + 1);
-
-            // k”Ô–Ú‚ÌƒJ[ƒh‚ğtemp‚É‘ã“ü
-            int temp = Dack_veiw[k];
-            Dack_veiw[k] = Dack_veiw[n];
-            Dack_veiw[n] = temp;
-        }
-    }
-
-    public enum state //ó‘Ô
+    public enum state //çŠ¶æ…‹
     {
         starttalk,
         battle,
