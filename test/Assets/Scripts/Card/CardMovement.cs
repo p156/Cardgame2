@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,25 +8,25 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public Transform cardParent;
     public int number;
 
-    public void OnBeginDrag(PointerEventData eventData) // ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½nï¿½ß‚ï¿½Æ‚ï¿½ï¿½Ésï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void OnBeginDrag(PointerEventData eventData) // ƒhƒ‰ƒbƒO‚ğn‚ß‚é‚Æ‚«‚És‚¤ˆ—
     {
         cardParent = transform.parent;
         number = transform.GetSiblingIndex();
         transform.rotation = Quaternion.identity;
         transform.SetParent(cardParent.parent, false);
         
-        GetComponent<CanvasGroup>().blocksRaycasts = false; // blocksRaycastsï¿½ï¿½ï¿½Iï¿½tï¿½É‚ï¿½ï¿½ï¿½
+        GetComponent<CanvasGroup>().blocksRaycasts = false; // blocksRaycasts‚ğƒIƒt‚É‚·‚é
     }
 
-    public void OnDrag(PointerEventData eventData) // ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‹Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void OnDrag(PointerEventData eventData) // ƒhƒ‰ƒbƒO‚µ‚½‚É‹N‚±‚·ˆ—
     {
         transform.position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData) // ï¿½Jï¿½[ï¿½hï¿½ğ—£‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ésï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public void OnEndDrag(PointerEventData eventData) // ƒJ[ƒh‚ğ—£‚µ‚½‚Æ‚«‚És‚¤ˆ—
     {
         transform.SetParent(cardParent, false);
         transform.SetSiblingIndex(number);
-        GetComponent<CanvasGroup>().blocksRaycasts = true; // blocksRaycastsï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
+        GetComponent<CanvasGroup>().blocksRaycasts = true; // blocksRaycasts‚ğƒIƒ“‚É‚·‚é
     }
 }
