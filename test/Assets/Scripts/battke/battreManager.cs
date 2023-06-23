@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class battreManager : MonoBehaviour
+public class battretest : MonoBehaviour
 {
     [SerializeField] private PLstatus.level Level_veiw;
 
@@ -23,13 +23,13 @@ public class battreManager : MonoBehaviour
     [SerializeField] Transform playerHand;
 
     [Header("エネミー&バトルステータス")]
-    [SerializeField] private GameObject enemy_HP;
+    //[SerializeField] private GameObject enemy_HP;
     [SerializeField] public Image Enemyimage;
-    [SerializeField] private GameObject TurnEnd;
-    [SerializeField] private GameObject ManaCostPanel;
+    //[SerializeField] private GameObject TurnEnd;
+    //[SerializeField] private GameObject ManaCostPanel;
 
     [Header("バトルステータス")]
-    private bool turnflag;    //ターン開始フラグ
+    [SerializeField] bool turnflag;    //ターン開始フラグ
 
 
     // Start is called before the first frame update
@@ -45,14 +45,14 @@ public class battreManager : MonoBehaviour
         {
             StartGame();
         }
-        if (int.Parse(enemy_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0)
-        {
-            //ゲーム終了処理
-        }
-        if (int.Parse(PL_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0)
-        {
-            //ゲームオーバー
-        }
+        //if (int.Parse(enemy_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0)
+        //{
+        //    //ゲーム終了処理
+        //}
+        //if (int.Parse(PL_HP.GetComponentInChildren<TextMeshProUGUI>().text) <= 0)
+        //{
+        //    //ゲームオーバー
+        //}
     }
     
     //ターン開始時

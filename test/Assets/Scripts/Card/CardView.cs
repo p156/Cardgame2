@@ -7,17 +7,17 @@ using TMPro;
 public class CardView : MonoBehaviour
 {
     public int ID;
-    public CardEntity.Type Job;
+    public CardEntity.属性 Class;
+    public CardEntity.種類 Job;
     public int jobPT;
     public int cost;
     [SerializeField] Image iconImage;
-    [SerializeField] TextMeshProUGUI cardname;
     public string flavor;
 
-    public void Show(CardModel cardModel) // cardModel�̃f�[�^�擾�Ɣ��f
+    public void Show(CardModel cardModel) // cardModelのデータ取得と反映
     {
-        cardname.text = cardModel.name;
         ID = cardModel.ID;
+        Class = cardModel.Class;
         Job = cardModel.Job;
         cost = cardModel.cost;
         jobPT = cardModel.jobPT;

@@ -8,7 +8,8 @@ public class CardModel
     public string name;
     public int ID;
     public int cardID;
-    public CardEntity.Type Job;
+    public CardEntity.属性 Class;
+    public CardEntity.種類 Job;
     public int cost;
     public int jobPT;
     public Sprite icon;
@@ -20,7 +21,8 @@ public class CardModel
 
         ID = cardID;
         name = cardEntity.cardname;
-        Job = cardEntity.Job;
+        Class = cardEntity.Class;
+        Job = cardEntity.type;
         cost = cardEntity.cost;
         jobPT = cardEntity.jobPT;
         icon = cardEntity.icon;
