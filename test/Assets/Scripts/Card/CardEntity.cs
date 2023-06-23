@@ -6,25 +6,21 @@ using UnityEngine;
 
 public class CardEntity : ScriptableObject
 {
-    public enum å±æ€§
+    public enum Type
     {
-        ãƒ¼,
-        æŠ‘æ­¢,
-        ç§˜åŒ¿,
-        è§£æ,
-    };
-
-    public enum ç¨®é¡
-    {
-        è¡Œå‹•,  // æ”»æ’ƒ
-        ã‚¹ã‚­ãƒ«,  // è¡Œå‹•
+        Attack,  // UŒ‚
+        Action,  // s“®
+        Heel,    // ‰ñ•œ
+        Record,  // –WŠQ
+        Poison,  // “Å
+        Jamming, // –WŠQ
+        Special, // “Áê
     };
 
     public string cardname;
     public int cardID;
+    public Type Job;
     public int cost;
-    public å±æ€§ Class;
-    public ç¨®é¡ type;
     public int jobPT;
     public Sprite icon;
     [TextArea(3, 5)] public string flavor;
